@@ -1,4 +1,4 @@
-package main.java.fr.eseo.twic.alidouya.server.model;
+package fr.eseo.twic.alidouya.server.model;
 
 import jakarta.persistence.*;
 
@@ -17,6 +17,17 @@ public class OrderDetail {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private Products product;
+
+    @Column(name = "quantity", nullable = false)
+    private Integer quantity;
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
 
     public Products getProduct() {
         return product;

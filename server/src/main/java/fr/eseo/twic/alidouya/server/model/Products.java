@@ -1,4 +1,4 @@
-package main.java.fr.eseo.twic.alidouya.server.model;
+package fr.eseo.twic.alidouya.server.model;
 
 import jakarta.persistence.*;
 

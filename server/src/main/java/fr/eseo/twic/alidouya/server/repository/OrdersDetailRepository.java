@@ -1,6 +1,6 @@
-package main.java.fr.eseo.twic.alidouya.server.repository;
+package fr.eseo.twic.alidouya.server.repository;
 
-import main.java.fr.eseo.twic.alidouya.server.model.OrderDetail;
+import fr.eseo.twic.alidouya.server.model.OrderDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface OrdersDetailRepository extends JpaRepository<OrderDetail, Long> {
