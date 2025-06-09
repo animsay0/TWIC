@@ -8,11 +8,17 @@
 		<version>3.5.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>fr.eseo.twic.alidouya</groupId>
-	<artifactId>server</artifactId>
+	<artifactId>server-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>server</name>
+	<modules>
+		<module>server</module>
+	</modules>
+
+	<name>server-parent</name>
 	<description>server</description>
+
 	<url/>
 	<licenses>
 		<license/>
