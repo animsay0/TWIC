@@ -30,13 +30,13 @@ public class Customer {
     private Instant registrationTimestamp;
 
     @OneToMany(mappedBy = "accountNo")
-    private Set<Orders> orders = new LinkedHashSet<>();
+    private Set<Order> orders = new LinkedHashSet<>();
 
-    public Set<Orders> getOrders() {
+    public Set<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Set<Orders> orders) {
+    public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
 

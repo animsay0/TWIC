@@ -7,7 +7,8 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
-public class Orders {
+@Table(name = "orders")
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
