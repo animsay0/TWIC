@@ -2,6 +2,9 @@ package fr.eseo.twic.alidouya.server.service;
 
 import fr.eseo.twic.alidouya.server.model.OrderDetail;
 import fr.eseo.twic.alidouya.server.repository.OrderDetailRepository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,5 +29,7 @@ public class OrderDetailService {
         orderDetailRepository.deleteById(id);
     }
 
-
+    public Page<OrderDetail> getOrderDetailsByOrderIdPaged(Long orderId, Pageable pageable) {
+        return orderDetailRepository.findByOrderId(orderId, pageable);
+    }
 }
