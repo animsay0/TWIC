@@ -1,0 +1,27 @@
+<div class="search-container">
+  <h2>Customer Search</h2>
+
+  <input [(ngModel)]="query" placeholder="Enter name or account no" />
+  <button (click)="search()">Search</button>
+
+  <p *ngIf="advice">External Data: {{ advice | json }}</p>
+
+  <table *ngIf="results.length > 0">
+    <thead>
+    <tr>
+      <th>Account No</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let customer of results" [routerLink]="['/customer', customer.accountNo]" style="cursor:pointer;">
+      <td>{{ customer.accountNo }}</td>
+      <td>{{ customer.firstName }}</td>
+      <td>{{ customer.lastName }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="noResults">No results found.</p>
+</div>

@@ -41,4 +41,9 @@ public class OrderService {
         orderRepository.deleteById(id);
     }
 
+
+    public Page<Order> getOrdersByCustomerAccountNo(String accountNo, Pageable pageable) {
+        return orderRepository.findByAccountNoAccountNoOrderByOrderStatusIdAscPlacedTimestampDesc(accountNo, pageable);
+    }
+
 }

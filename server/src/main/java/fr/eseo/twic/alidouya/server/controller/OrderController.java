@@ -44,4 +44,11 @@ public class OrderController {
     public void deleteOrder(@PathVariable Long id) {
         orderService.deleteOrder(id);
     }
+
+    @GetMapping("/customer/{accountNo}")
+    public Page<Order> getOrdersByCustomerAccountNo(@PathVariable String accountNo, Pageable pageable) {
+        return orderService.getOrdersByCustomerAccountNo(accountNo, pageable);
+    }
+
+
 }
