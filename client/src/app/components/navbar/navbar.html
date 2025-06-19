@@ -2,5 +2,8 @@
   <a routerLink="/search" routerLinkActive="active">Search</a>
   <a (click)="goToLastCustomer()" style="cursor:pointer;"
      [class.active]="isCustomerActive()">Customer</a>
-  <a routerLink="/#" routerLinkActive="active">Order</a>
+  <a (click)="goToLastOrder()"
+     [class.active]="isOrderActive()" style="cursor: pointer;">
+    Order
+  </a>
 </nav>

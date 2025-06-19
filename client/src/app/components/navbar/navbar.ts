@@ -29,4 +29,18 @@ export class Navbar {
   isCustomerActive(): boolean {
     return this.currentUrl.startsWith('/customer');
   }
+
+  goToLastOrder(): void {
+    const lastOrderId = localStorage.getItem('lastOrderId');
+    if (lastOrderId) {
+      this.router.navigate(['/order', lastOrderId]);
+    } else {
+      this.router.navigate(['/search']);
+    }
+  }
+
+  isOrderActive(): boolean {
+    return this.router.url.startsWith('/order');
+  }
+
 }

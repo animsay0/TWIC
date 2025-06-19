@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Api} from '../../services/api';
 
@@ -8,7 +8,7 @@ import {Api} from '../../services/api';
   templateUrl: './customer.html',
   styleUrl: './customer.css'
 })
-export class Customer {
+export class Customer implements OnInit{
 
   accountNo = '';
   customer: any = null;
@@ -55,6 +55,7 @@ export class Customer {
 
   goToOrder(orderId: number): void {
     this.router.navigate(['/order', orderId]);
+
   }
 
   createOrder(): void {

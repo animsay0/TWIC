@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Api} from '../../services/api';
 
 
@@ -8,7 +8,7 @@ import {Api} from '../../services/api';
   templateUrl: './search.html',
   styleUrl: './search.css'
 })
-export class Search {
+export class Search implements OnInit{
 
   /*query = '';
   results: any[] = [];

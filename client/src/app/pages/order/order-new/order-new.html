@@ -1,0 +1,36 @@
+<h2>Create New Order</h2>
+
+<p><strong>Account No:</strong> {{ accountNo }}</p>
+<p><strong>Status:</strong> PLACED </p>
+
+<h3>Order Details</h3>
+<table>
+  <thead>
+  <tr>
+    <th>Product Code</th>
+    <th>Product Name</th>
+    <th>Quantity</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let d of orderDetails; let i = index">
+    <td>
+      <select [(ngModel)]="d.productCode" (change)="updateFromCode(i)">
+        <option *ngFor="let p of products" [value]="p.productCode">{{ p.productCode }}</option>
+      </select>
+    </td>
+    <td>
+      <select [(ngModel)]="d.productName" (change)="updateFromName(i)">
+        <option *ngFor="let p of products" [value]="p.productName">{{ p.productName }}</option>
+      </select>
+    </td>
+    <td><input type="number" [(ngModel)]="d.quantity" min="1"></td>
+    <td><button (click)="removeLine(i)">−</button></td>
+  </tr>
+  </tbody>
+</table>
+
+<button (click)="addLine()">+ Add</button>
+<br><br>
+<button (click)="save()" [disabled]="orderDetails.length === 0">Save</button>

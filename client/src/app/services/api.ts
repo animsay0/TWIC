@@ -34,4 +34,21 @@ export class Api {
   getAdvice(): Observable<any> {
     return this.http.get(`${this.baseUrl}/advice`);
   }
+
+  getProducts(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/products`);
+  }
+
+  createOrder(order: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/orders`, order);
+  }
+
+  getOrder(orderId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/orders/${orderId}`);
+  }
+
+  updateOrder(orderId: number, dto: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/orders/${orderId}`, dto);
+  }
+
 }

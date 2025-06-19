@@ -2,17 +2,19 @@ package fr.eseo.twic.alidouya.server.controller;
 
 import fr.eseo.twic.alidouya.server.config.ApiRoutes;
 import fr.eseo.twic.alidouya.server.dto.OrderDTO;
+import fr.eseo.twic.alidouya.server.dto.OrderFullDTO;
 import fr.eseo.twic.alidouya.server.model.Order;
 import fr.eseo.twic.alidouya.server.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
-@RequestMapping(ApiRoutes.BASE+ "/orders")
+@RequestMapping(ApiRoutes.BASE + "/orders")
 public class OrderController {
     private final OrderService orderService;
 
@@ -26,20 +28,28 @@ public class OrderController {
         return orderService.getAllOrders(pageable);
     }
 
-    @GetMapping("/{id}")
+    /*@GetMapping("/{id}")
     public Optional<Order> getOrderById(@PathVariable Long id) {
         return orderService.getOrderById(id);
+    }*/
+
+    @GetMapping("/{id}")
+    public OrderFullDTO getOrderFull(@PathVariable Long id) {
+        return orderService.getOrderFullById(id);
     }
 
     @PostMapping
-    public Order createOrder(@RequestBody Order order) {
-        return orderService.createOrder(order);
+    public ResponseEntity<OrderFullDTO> createOrder(@RequestBody OrderFullDTO dto) {
+        Order created = orderService.createOrder(dto);
+        return ResponseEntity.ok(orderService.getOrderFullById(created.getId()));
     }
 
     @PutMapping("/{id}")
-    public Order updateOrder(@PathVariable Long id, @RequestBody Order updated) {
-        return orderService.updateOrder(id, updated);
+    public ResponseEntity<OrderFullDTO> updateOrder(@PathVariable Long id, @RequestBody OrderFullDTO dto) {
+        Order updated = orderService.updateOrder(id, dto);
+        return ResponseEntity.ok(orderService.getOrderFullById(updated.getId()));
     }
+
 
     @DeleteMapping("/{id}")
     public void deleteOrder(@PathVariable Long id) {
@@ -50,7 +60,6 @@ public class OrderController {
     public Page<OrderDTO> getOrdersByCustomerAccountNo(@PathVariable String accountNo, Pageable pageable) {
         return orderService.getOrdersByCustomerAccountNo(accountNo, pageable);
     }
-
 
 
 }
