@@ -13,9 +13,11 @@ export class Api {
 
   constructor(private http: HttpClient) {}
 
-  getCustomers(query: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/customers?search=${query}`);
+  getCustomers(query: string, page: number, size: number): Observable<any> {
+    const params = `?search=${query}&page=${page}&size=${size}`;
+    return this.http.get(`${this.baseUrl}/customers${params}`);
   }
+
 
   getCustomer(accountNo: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/customers/${accountNo}`);

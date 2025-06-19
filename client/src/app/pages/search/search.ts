@@ -10,7 +10,7 @@ import {Api} from '../../services/api';
 })
 export class Search {
 
-  query = '';
+  /*query = '';
   results: any[] = [];
   advice: any;
   noResults = false;
@@ -26,5 +26,80 @@ export class Search {
 
   ngOnInit(): void {
     this.api.getAdvice().subscribe(data => this.advice = data);
+  }*/
+
+  /*query = '';
+  results: any[] = [];
+  advice: string = '';
+  noResults = false;
+
+  page = 0;
+  size = 10;
+  totalPages = 0;
+
+  constructor(private api: Api) {}
+
+  ngOnInit(): void {
+    this.api.getAdvice().subscribe(data => {
+      this.advice = data?.slip?.advice || data;
+      alert(`💡 Advice : ${this.advice}`);
+    });
   }
+
+  search(page = 0): void {
+    this.page = page;
+    this.api.getCustomers(this.query, page, this.size).subscribe(data => {
+      this.results = data.content;
+      this.totalPages = data.totalPages;
+      this.noResults = this.results.length === 0;
+    });
+  }
+
+  previousPage(): void {
+    if (this.page > 0) this.search(this.page - 1);
+  }
+
+  nextPage(): void {
+    if (this.page + 1 < this.totalPages) this.search(this.page + 1);
+  }*/
+
+  query = '';
+  results: any[] = [];
+  advice: string = '';
+  noResults = false;
+
+  page = 0;
+  size = 10;
+  totalPages = 0;
+
+  constructor(private api: Api) {}
+
+  ngOnInit(): void {
+    this.api.getAdvice().subscribe(data => {
+      this.advice = data?.slip?.advice || data;
+      alert(`💡 Conseil : ${this.advice}`);
+    });
+  }
+
+  search(page = 0): void {
+    this.page = page;
+    this.api.getCustomers(this.query, this.page, this.size).subscribe(data => {
+      this.results = data.content;
+      this.totalPages = data.totalPages;
+      this.noResults = this.results.length === 0;
+    });
+  }
+
+  previousPage(): void {
+    if (this.page > 0) {
+      this.search(this.page - 1);
+    }
+  }
+
+  nextPage(): void {
+    if (this.page + 1 < this.totalPages) {
+      this.search(this.page + 1);
+    }
+  }
+
 }

@@ -8,7 +8,6 @@ import { App } from './app';
 import { Search } from './pages/search/search';
 import { Customer } from './pages/customer/customer';
 import { Order } from './pages/order/order';
-import { Test } from './test/test';
 import {FormsModule} from '@angular/forms';
 import { Footer } from './components/footer/footer';
 import { Navbar } from './components/navbar/navbar';
