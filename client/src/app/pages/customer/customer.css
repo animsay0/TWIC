@@ -1,0 +1,20 @@
+.order-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.order-table th, .order-table td {
+  border: 1px solid #ccc;
+  padding: 0.6rem 1rem;
+  text-align: left;
+}
+
+.order-table th {
+  background-color: #f8f8f8;
+}
+
+.order-table td.number {
+  text-align: center;
+  font-weight: bold;
+}

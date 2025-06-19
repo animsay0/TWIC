@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,4 +9,24 @@ import { Component } from '@angular/core';
 })
 export class Navbar {
 
+  currentUrl: string = '';
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(() => {
+      this.currentUrl = this.router.url;
+    });
+  }
+
+  goToLastCustomer(): void {
+    const last = localStorage.getItem('lastCustomerAccountNo');
+    if (last) {
+      this.router.navigate(['/customer', last]);
+    } else {
+      this.router.navigate(['/search']);
+    }
+  }
+
+  isCustomerActive(): boolean {
+    return this.currentUrl.startsWith('/customer');
+  }
 }

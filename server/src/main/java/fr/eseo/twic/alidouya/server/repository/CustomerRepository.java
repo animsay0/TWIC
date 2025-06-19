@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
@@ -17,5 +19,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
             "LOWER(c.firstName) LIKE LOWER(CONCAT('%', :search, '%')) OR " +
             "LOWER(c.lastName) LIKE LOWER(CONCAT('%', :search, '%'))")
     Page<Customer> searchCustomers(@Param("search") String search, Pageable pageable);
+
+    Optional<Customer> findByAccountNo(String accountNo);
 
 }

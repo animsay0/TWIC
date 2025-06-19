@@ -1,6 +1,7 @@
 package fr.eseo.twic.alidouya.server.controller;
 
 import fr.eseo.twic.alidouya.server.config.ApiRoutes;
+import fr.eseo.twic.alidouya.server.dto.OrderDTO;
 import fr.eseo.twic.alidouya.server.model.Order;
 import fr.eseo.twic.alidouya.server.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,9 +47,10 @@ public class OrderController {
     }
 
     @GetMapping("/customer/{accountNo}")
-    public Page<Order> getOrdersByCustomerAccountNo(@PathVariable String accountNo, Pageable pageable) {
+    public Page<OrderDTO> getOrdersByCustomerAccountNo(@PathVariable String accountNo, Pageable pageable) {
         return orderService.getOrdersByCustomerAccountNo(accountNo, pageable);
     }
+
 
 
 }

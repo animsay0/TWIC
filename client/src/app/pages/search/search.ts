@@ -77,7 +77,7 @@ export class Search {
   ngOnInit(): void {
     this.api.getAdvice().subscribe(data => {
       this.advice = data?.slip?.advice || data;
-      alert(`💡 Conseil : ${this.advice}`);
+      alert(`💡 Advice : ${this.advice}`);
     });
   }
 

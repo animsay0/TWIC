@@ -1,1 +1,61 @@
-<p>customer works!</p>
+<div class="customer-page" *ngIf="customer">
+  <h2>Customer Details</h2>
+
+  <ul>
+    <li><strong>ID:</strong> {{ customer.id }}</li>
+    <li><strong>Account No:</strong> {{ customer.accountNo }}</li>
+    <li><strong>First Name:</strong> {{ customer.firstName }}</li>
+    <li><strong>Last Name:</strong> {{ customer.lastName }}</li>
+    <li><strong>Email:</strong> {{ customer.email }}</li>
+    <li><strong>Registered:</strong> {{ customer.registrationTimestamp | date:'medium' }}</li>
+  </ul>
+
+  <!--<h3>Orders</h3>
+  <table *ngIf="orders.length > 0">
+    <thead>
+    <tr>
+      <th>Order Number</th>
+      <th>Order Date</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let order of orders" (click)="goToOrder(order.id)" style="cursor:pointer;">
+      <td>{{ order.id }}</td>
+      <td>{{ order.placedTimestamp | date:'short' }}</td>
+      <td>{{ order.orderStatus }}</td>
+    </tr>
+    </tbody>
+  </table>-->
+  <h3>Orders</h3>
+
+  <table *ngIf="orders.length > 0" class="order-table">
+    <thead>
+    <tr>
+      <th>Order Number</th>
+      <th>Order Date</th>
+      <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let order of orders"
+        (click)="goToOrder(order.id)"
+        style="cursor: pointer;">
+      <td class="number">{{ order.id }}</td>
+      <td>{{ order.placedTimestamp | date:'d MMM y, HH:mm' }}</td>
+      <td>{{ order.orderStatus }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+  <div *ngIf="orders.length === 0">No orders found.</div>
+
+  <div *ngIf="orders.length > 0" class="pagination">
+    <button (click)="previousPage()" [disabled]="page === 0">Previous</button>
+    <span>Page {{ page + 1 }} of {{ totalPages }}</span>
+    <button (click)="nextPage()" [disabled]="page + 1 >= totalPages">Next</button>
+  </div>
+
+  <button (click)="createOrder()">New Order</button>
+</div>

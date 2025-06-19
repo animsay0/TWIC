@@ -14,4 +14,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     Page<Order> findByAccountNoAccountNoOrderByOrderStatusIdAscPlacedTimestampDesc(String accountNo, Pageable pageable);
 
+
 }
