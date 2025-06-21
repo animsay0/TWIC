@@ -1,0 +1,88 @@
+.order-new-card {
+  max-width: 850px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.order-new-card h2,
+.order-new-card h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.order-new-card p {
+  font-size: 1rem;
+  margin: 0.8rem 0;
+}
+
+.order-new-card strong {
+  display: inline-block;
+  width: 140px;
+  color: #34495e;
+}
+
+.order-new-card select,
+.order-new-card input[type="number"] {
+  width: 100%;
+  padding: 0.4rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+}
+
+.order-new-card select:disabled {
+  background-color: #eee;
+}
+
+.order-new-card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+}
+
+.order-new-card th {
+  background-color: #2c3e50;
+  color: white;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.order-new-card td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.order-new-card tr:hover {
+  background-color: #f2f2f2;
+}
+
+.order-new-card button {
+  padding: 0.6rem 1.2rem;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.order-new-card button:hover:not(:disabled) {
+  background-color: #1a242f;
+}
+
+.order-new-card button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.order-new-card > button:last-of-type {
+  margin-top: 2rem;
+  display: block;
+}

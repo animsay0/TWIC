@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Api} from '../../../services/api';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-order-new',
@@ -16,7 +17,7 @@ export class OrderNew implements OnInit{
   orderStatus = 'PLACED'; // par défaut
 
 
-  constructor(private api: Api, private route: ActivatedRoute, private router: Router) {}
+  constructor(private api: Api, private route: ActivatedRoute, private router: Router, private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.accountNo = this.route.snapshot.paramMap.get('accountNo')!;
@@ -56,12 +57,14 @@ export class OrderNew implements OnInit{
       }))
     };
 
-    console.log(dto)
-
-    this.api.createOrder(dto).subscribe(created => {
-      this.router.navigate(['/order', created.id]);
-      localStorage.setItem('lastOrderId', created.id.toString()); // ✅
-
+    this.api.createOrder(dto).subscribe({
+      next :created => {
+        this.router.navigate(['/order', created.id]);
+        localStorage.setItem('lastOrderId', created.id.toString()); // ✅
+        this.toastr.success('Order created successfully!', 'Success');
+      },
+      error: () => {
+        this.toastr.error('Failed to create order.', 'Error', { positionClass : 'toast-top-center' });      }
     });
   }
 }

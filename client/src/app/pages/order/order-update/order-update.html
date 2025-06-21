@@ -1,42 +1,46 @@
-<h2>Modify Order #{{ orderId }}</h2>
+<div class="order-update-card" *ngIf="order">
+    <h2>Modify Order #{{ orderId }}</h2>
 
-<div *ngIf="order">
-  <p><strong>Account No:</strong> {{ order.accountNo }}</p>
+    <div *ngIf="order">
+        <p><strong>Account No:</strong> {{ order.accountNo }}</p>
 
-  <p>
-    <strong>Status:</strong>
-    <select [(ngModel)]="orderStatus" (change)="onStatusChange()" [disabled]="originalStatus !== 'PLACED'">
-      <!--<option value="PLACED">PLACED</option>
-      <option value="DELIVERED">DELIVERED</option>
-      <option value="CANCELLED">CANCELLED</option>-->
-      <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
-    </select>
-  </p>
+        <p>
+            <strong>Status:</strong>
+            <select [(ngModel)]="orderStatus" (change)="onStatusChange()" [disabled]="originalStatus !== 'PLACED'">
+                <!--<option value="PLACED">PLACED</option>
+                <option value="DELIVERED">DELIVERED</option>
+                <option value="CANCELLED">CANCELLED</option>-->
+                <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+            </select>
+        </p>
 
-  <p><strong>Placed:</strong> {{ order.placedTimestamp | date:'short' }}</p>
-  <p *ngIf="order.deliveredTimestamp"><strong>Delivered:</strong> {{ order.deliveredTimestamp | date:'short' }}</p>
-  <p *ngIf="order.cancelledTimestamp"><strong>Cancelled:</strong> {{ order.cancelledTimestamp | date:'short' }}</p>
-  <p><strong>Total:</strong> {{ order.orderTotal | number:'1.2-2' }} €</p>
+        <p><strong>Placed:</strong> {{ order.placedTimestamp | date:'short' }}</p>
+        <p *ngIf="order.deliveredTimestamp"><strong>Delivered:</strong> {{ order.deliveredTimestamp | date:'short' }}
+        </p>
+        <p *ngIf="order.cancelledTimestamp"><strong>Cancelled:</strong> {{ order.cancelledTimestamp | date:'short' }}
+        </p>
+        <p><strong>Total:</strong> {{ order.orderTotal | number:'1.2-2' }} €</p>
 
-  <h3>Order Details</h3>
-  <table>
-    <thead>
-    <tr>
-      <th>Product Code</th>
-      <th>Product Name</th>
-      <th>Quantity</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let d of order.orderDetails">
-      <td>{{ d.productNo }}</td>
-      <td>{{ d.productName }}</td>
-      <td>{{ d.quantity }}</td>
-    </tr>
-    </tbody>
-  </table>
+        <h3>Order Details</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>Product Code</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let d of order.orderDetails">
+                <td>{{ d.productNo }}</td>
+                <td>{{ d.productName }}</td>
+                <td>{{ d.quantity }}</td>
+            </tr>
+            </tbody>
+        </table>
 
-  <br>
-  <button (click)="modify()" [disabled]="!modified">Modify</button>
+        <br>
+        <button (click)="modify()" [disabled]="!modified">Modify</button>
 
+    </div>
 </div>

@@ -1,5 +1,15 @@
 <app-navbar></app-navbar>
 
-<router-outlet></router-outlet>
+<main class="content">
+  <router-outlet></router-outlet>
+</main>
 
 <app-footer></app-footer>
+
+
+<div class="advice-modal" *ngIf="adviceMessage">
+  <div class="advice-card">
+    <p>💡 <strong>Advice</strong>: {{ adviceMessage }}</p>
+    <button (click)="adviceMessage = null">OK</button>
+  </div>
+</div>

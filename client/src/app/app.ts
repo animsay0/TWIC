@@ -8,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class App {
   protected title = 'client';
+
+  adviceMessage: string | null = null;
+
+// Appelle cette méthode pour afficher
+  showAdvice(message: string) {
+    this.adviceMessage = message;
+  }
 }
