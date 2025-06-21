@@ -3,33 +3,43 @@ pipeline {
 
   environment {
     SONARQUBE_ENV = 'sonarqube default'
-
-    }
+    SONAR_LOGIN = credentials('sonar-token')
+  }
 
   stages {
+
+    stage('Clone repository') {
+      steps {
+        git url: 'https://github.com/eseo-angers/twic-2025-s1-rattrapage-alidou-yasmina.git', branch: 'main'
+      }
+    }
+
     stage('Build Backend') {
       steps {
         dir('server') {
-          sh 'mvn clean install'
+          bat 'call mvn clean install'
         }
       }
     }
 
     stage('SonarQube Analysis') {
-        steps {
-            withSonarQubeEnv("${SONARQUBE_ENV}") {
+      steps {
+            withSonarQubeEnv('sonarqube default') {
+              withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
                 dir('server') {
-                    sh 'mvn sonar:sonar'
+                  bat "mvn sonar:sonar -Dsonar.login=%SONAR_TOKEN%"
                 }
+              }
             }
         }
     }
 
+
     stage('Build Frontend') {
       steps {
         dir('client') {
-          sh 'npm install'
-          sh 'ng build --configuration production'
+          bat 'npm install'
+          bat 'ng build --configuration production'
         }
       }
     }
