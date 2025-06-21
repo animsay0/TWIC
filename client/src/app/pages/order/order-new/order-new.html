@@ -1,7 +1,12 @@
 <h2>Create New Order</h2>
 
 <p><strong>Account No:</strong> {{ accountNo }}</p>
-<p><strong>Status:</strong> PLACED </p>
+<p>
+  <strong>Status:</strong>
+  <select [(ngModel)]="orderStatus" disabled>
+    <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+  </select>
+</p>
 
 <h3>Order Details</h3>
 <table>

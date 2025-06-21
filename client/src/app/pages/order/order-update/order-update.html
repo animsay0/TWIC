@@ -6,9 +6,10 @@
   <p>
     <strong>Status:</strong>
     <select [(ngModel)]="orderStatus" (change)="onStatusChange()" [disabled]="originalStatus !== 'PLACED'">
-      <option value="PLACED">PLACED</option>
+      <!--<option value="PLACED">PLACED</option>
       <option value="DELIVERED">DELIVERED</option>
-      <option value="CANCELLED">CANCELLED</option>
+      <option value="CANCELLED">CANCELLED</option>-->
+      <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
     </select>
   </p>
 

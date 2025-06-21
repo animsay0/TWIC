@@ -16,6 +16,7 @@ export class OrderUpdate implements OnInit{
   orderStatus: string = '';
   originalStatus: string = '';
   modified = false;
+  statuses: string[] = [];
 
   constructor(private api: Api, private route: ActivatedRoute, private router: Router, private toastr: ToastrService) {}
 
@@ -27,6 +28,9 @@ export class OrderUpdate implements OnInit{
       this.originalStatus = data.orderStatus;
       localStorage.setItem('lastOrderId', this.orderId.toString()); // ✅
 
+    });
+    this.api.getOrderStatuses().subscribe(data => {
+      this.statuses = data.map((s: any) => s.status);
     });
   }
 

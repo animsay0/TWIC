@@ -12,12 +12,18 @@ export class OrderNew implements OnInit{
   accountNo = '';
   products: any[] = [];
   orderDetails: any[] = [];
+  statuses: string[] = [];
+  orderStatus = 'PLACED'; // par défaut
+
 
   constructor(private api: Api, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.accountNo = this.route.snapshot.paramMap.get('accountNo')!;
     this.api.getProducts().subscribe(data => this.products = data);
+    this.api.getOrderStatuses().subscribe(data => {
+      this.statuses = data.map((s: any) => s.status);
+    });
   }
 
   addLine(): void {

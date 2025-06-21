@@ -51,4 +51,9 @@ export class Api {
     return this.http.put(`${this.baseUrl}/orders/${orderId}`, dto);
   }
 
+  getOrderStatuses(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/order-statuses`);
+  }
+
+
 }
