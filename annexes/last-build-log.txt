@@ -1,0 +1,285 @@
+Started by user Yasmina Alidou
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of %SONAR_LOGIN%
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Clone repository)
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+ > C:\Program Files\Git\cmd\git.exe rev-parse --resolve-git-dir C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\.git # timeout=10
+Fetching changes from the remote Git repository
+ > C:\Program Files\Git\cmd\git.exe config remote.origin.url https://github.com/eseo-angers/twic-2025-s1-rattrapage-alidou-yasmina.git # timeout=10
+Fetching upstream changes from https://github.com/eseo-angers/twic-2025-s1-rattrapage-alidou-yasmina.git
+ > C:\Program Files\Git\cmd\git.exe --version # timeout=10
+ > git --version # 'git version 2.45.2.windows.1'
+ > C:\Program Files\Git\cmd\git.exe fetch --tags --force --progress -- https://github.com/eseo-angers/twic-2025-s1-rattrapage-alidou-yasmina.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > C:\Program Files\Git\cmd\git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+Checking out Revision 40dcbc0e2a7b09efd78416afde2715355c643714 (refs/remotes/origin/main)
+ > C:\Program Files\Git\cmd\git.exe config core.sparsecheckout # timeout=10
+ > C:\Program Files\Git\cmd\git.exe checkout -f 40dcbc0e2a7b09efd78416afde2715355c643714 # timeout=10
+ > C:\Program Files\Git\cmd\git.exe branch -a -v --no-abbrev # timeout=10
+ > C:\Program Files\Git\cmd\git.exe branch -D main # timeout=10
+ > C:\Program Files\Git\cmd\git.exe checkout -b main 40dcbc0e2a7b09efd78416afde2715355c643714 # timeout=10
+Commit message: "feat : result sur la page search"
+ > C:\Program Files\Git\cmd\git.exe rev-list --no-walk b402531b1d1a0035d5a45831080f72ac7458aaf0 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Backend)
+[Pipeline] dir
+Running in C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\server
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\server>call mvn clean install 
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< fr.eseo.twic.alidouya:server >--------------------
+[INFO] Building server 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ server ---
+[INFO] Deleting C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\server\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ server ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.14.0:compile (default-compile) @ server ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 32 source files with javac [debug parameters release 17] to target\classes
+[INFO] /C:/Users/yasmi/.jenkins/workspace/pipeline-r-twic/server/src/main/java/fr/eseo/twic/alidouya/server/service/CustomerService.java: C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\server\src\main\java\fr\eseo\twic\alidouya\server\service\CustomerService.java uses unchecked or unsafe operations.
+[INFO] /C:/Users/yasmi/.jenkins/workspace/pipeline-r-twic/server/src/main/java/fr/eseo/twic/alidouya/server/service/CustomerService.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ server ---
+[INFO] skip non existing resourceDirectory C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\server\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.14.0:testCompile (default-testCompile) @ server ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ server ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ server ---
+[INFO] Building jar: C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\server\target\server-0.0.1-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:3.5.0:repackage (repackage) @ server ---
+[INFO] Replacing main artifact C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\server\target\server-0.0.1-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\server\target\server-0.0.1-SNAPSHOT.jar.original
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ server ---
+[INFO] Installing C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\server\pom.xml to C:\Users\yasmi\.m2\repository\fr\eseo\twic\alidouya\server\0.0.1-SNAPSHOT\server-0.0.1-SNAPSHOT.pom
+[INFO] Installing C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\server\target\server-0.0.1-SNAPSHOT.jar to C:\Users\yasmi\.m2\repository\fr\eseo\twic\alidouya\server\0.0.1-SNAPSHOT\server-0.0.1-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  7.709 s
+[INFO] Finished at: 2025-06-21T17:17:19+02:00
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (SonarQube Analysis)
+[Pipeline] withSonarQubeEnv
+Injecting SonarQube environment variables using the configuration: sonarqube default
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of %SONAR_TOKEN%
+[Pipeline] {
+[Pipeline] dir
+Running in C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\server
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\server>mvn sonar:sonar -Dsonar.login=**** 
+[INFO] Scanning for projects...
+[WARNING] The artifact org.codehaus.mojo:sonar-maven-plugin:jar:4.0.0.4121 has been relocated to org.sonarsource.scanner.maven:sonar-maven-plugin:jar:4.0.0.4121: SonarQube plugin was moved to SonarSource organisation
+[INFO] 
+[INFO] --------------------< fr.eseo.twic.alidouya:server >--------------------
+[INFO] Building server 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- sonar:4.0.0.4121:sonar (default-cli) @ server ---
+[WARNING] 17:17:24.303 Using an unspecified version instead of an explicit plugin version may introduce breaking analysis changes at an unwanted time. It is highly recommended to use an explicit version, e.g. 'org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121'.
+[INFO] 17:17:24.330 Java 17.0.2 Oracle Corporation (64-bit)
+[INFO] 17:17:24.331 Windows 11 10.0 (amd64)
+[INFO] 17:17:24.831 User cache: C:\Users\yasmi\.sonar\cache
+[INFO] 17:17:25.037 Communicating with SonarQube Server 9.9.8.100196
+[INFO] 17:17:25.068 Default locale: "en_US", source code encoding: "UTF-8"
+[INFO] 17:17:25.886 Load global settings
+[INFO] 17:17:26.016 Load global settings (done) | time=131ms
+[INFO] 17:17:26.021 Server id: 147B411E-AZXdQ28f6pkJ9Uxvv3SQ
+[INFO] 17:17:26.026 User cache: C:\Users\yasmi\.sonar\cache
+[INFO] 17:17:26.030 Load/download plugins
+[INFO] 17:17:26.030 Load plugins index
+[INFO] 17:17:26.092 Load plugins index (done) | time=62ms
+[INFO] 17:17:26.208 Load/download plugins (done) | time=178ms
+[INFO] 17:17:26.887 Process project properties
+[INFO] 17:17:26.905 Process project properties (done) | time=17ms
+[INFO] 17:17:26.907 Execute project builders
+[INFO] 17:17:26.911 Execute project builders (done) | time=4ms
+[INFO] 17:17:26.921 Project key: fr.eseo.twic.alidouya:server
+[INFO] 17:17:26.922 Base dir: C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\server
+[INFO] 17:17:26.922 Working dir: C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\server\target\sonar
+[INFO] 17:17:26.930 Load project settings for component key: 'fr.eseo.twic.alidouya:server'
+[INFO] 17:17:26.963 Load project settings for component key: 'fr.eseo.twic.alidouya:server' (done) | time=33ms
+[INFO] 17:17:27.257 Auto-configuring with CI 'Jenkins'
+[INFO] 17:17:27.262 Load quality profiles
+[INFO] 17:17:27.438 Load quality profiles (done) | time=176ms
+[INFO] 17:17:27.441 Load active rules
+[INFO] 17:17:30.045 Load active rules (done) | time=2604ms
+[INFO] 17:17:30.048 Load analysis cache
+[INFO] 17:17:30.068 Load analysis cache (791 bytes) | time=20ms
+[INFO] 17:17:30.139 Load project repositories
+[INFO] 17:17:30.164 Load project repositories (done) | time=25ms
+[INFO] 17:17:30.215 Indexing files...
+[INFO] 17:17:30.216 Project configuration:
+[INFO] 17:17:30.771 33 files indexed
+[INFO] 17:17:30.771 0 files ignored because of scm ignore settings
+[INFO] 17:17:30.772 Quality profile for java: Sonar way
+[INFO] 17:17:30.772 Quality profile for xml: Sonar way
+[INFO] 17:17:30.772 ------------- Run sensors on module server
+[INFO] 17:17:30.930 Load metrics repository
+[INFO] 17:17:30.959 Load metrics repository (done) | time=29ms
+[INFO] 17:17:33.075 Sensor JavaSensor [java]
+[INFO] 17:17:33.084 Configured Java source version (sonar.java.source): 17
+[INFO] 17:17:33.092 JavaClasspath initialization
+[INFO] 17:17:33.115 JavaClasspath initialization (done) | time=23ms
+[INFO] 17:17:33.115 JavaTestClasspath initialization
+[INFO] 17:17:33.134 JavaTestClasspath initialization (done) | time=18ms
+[INFO] 17:17:33.159 Server-side caching is enabled. The Java analyzer will not try to leverage data from a previous analysis.
+[INFO] 17:17:33.167 Using ECJ batch to parse 32 Main java source files with batch size 198 KB.
+[INFO] 17:17:33.607 Starting batch processing.
+[INFO] 17:17:34.201 The Java analyzer cannot skip unchanged files in this context. A full analysis is performed for all files.
+[INFO] 17:17:36.568 100% analyzed
+[INFO] 17:17:36.568 Batch processing: Done.
+[INFO] 17:17:36.571 Did not optimize analysis for any files, performed a full analysis for all 32 files.
+[INFO] 17:17:36.574 No "Test" source files to scan.
+[INFO] 17:17:36.574 No "Generated" source files to scan.
+[INFO] 17:17:36.574 Sensor JavaSensor [java] (done) | time=3500ms
+[INFO] 17:17:36.574 Sensor JaCoCo XML Report Importer [jacoco]
+[INFO] 17:17:36.575 'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+[INFO] 17:17:36.576 No report imported, no coverage information will be imported by JaCoCo XML Report Importer
+[INFO] 17:17:36.577 Sensor JaCoCo XML Report Importer [jacoco] (done) | time=3ms
+[INFO] 17:17:36.577 Sensor CSS Rules [javascript]
+[INFO] 17:17:36.578 No CSS, PHP, HTML or VueJS files are found in the project. CSS analysis is skipped.
+[INFO] 17:17:36.578 Sensor CSS Rules [javascript] (done) | time=1ms
+[INFO] 17:17:36.578 Sensor C# Project Type Information [csharp]
+[INFO] 17:17:36.579 Sensor C# Project Type Information [csharp] (done) | time=1ms
+[INFO] 17:17:36.579 Sensor C# Analysis Log [csharp]
+[INFO] 17:17:36.601 Sensor C# Analysis Log [csharp] (done) | time=22ms
+[INFO] 17:17:36.601 Sensor C# Properties [csharp]
+[INFO] 17:17:36.602 Sensor C# Properties [csharp] (done) | time=1ms
+[INFO] 17:17:36.602 Sensor SurefireSensor [java]
+[INFO] 17:17:36.602 parsing [C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\server\target\surefire-reports]
+[INFO] 17:17:36.603 Sensor SurefireSensor [java] (done) | time=1ms
+[INFO] 17:17:36.603 Sensor HTML [web]
+[INFO] 17:17:36.606 Sensor HTML [web] (done) | time=3ms
+[INFO] 17:17:36.606 Sensor XML Sensor [xml]
+[INFO] 17:17:36.612 1 source file to be analyzed
+[INFO] 17:17:36.818 1/1 source file has been analyzed
+[INFO] 17:17:36.819 Sensor XML Sensor [xml] (done) | time=213ms
+[INFO] 17:17:36.819 Sensor TextAndSecretsSensor [text]
+[INFO] 17:17:36.828 33 source files to be analyzed
+[INFO] 17:17:36.863 33/33 source files have been analyzed
+[INFO] 17:17:36.863 Sensor TextAndSecretsSensor [text] (done) | time=44ms
+[INFO] 17:17:36.864 Sensor VB.NET Project Type Information [vbnet]
+[INFO] 17:17:36.865 Sensor VB.NET Project Type Information [vbnet] (done) | time=1ms
+[INFO] 17:17:36.866 Sensor VB.NET Analysis Log [vbnet]
+[INFO] 17:17:36.893 Sensor VB.NET Analysis Log [vbnet] (done) | time=26ms
+[INFO] 17:17:36.893 Sensor VB.NET Properties [vbnet]
+[INFO] 17:17:36.893 Sensor VB.NET Properties [vbnet] (done) | time=0ms
+[INFO] 17:17:36.893 Sensor IaC Docker Sensor [iac]
+[INFO] 17:17:36.897 0 source files to be analyzed
+[INFO] 17:17:36.964 0/0 source files have been analyzed
+[INFO] 17:17:36.965 Sensor IaC Docker Sensor [iac] (done) | time=72ms
+[INFO] 17:17:36.970 ------------- Run sensors on project
+[INFO] 17:17:37.042 Sensor Analysis Warnings import [csharp]
+[INFO] 17:17:37.044 Sensor Analysis Warnings import [csharp] (done) | time=2ms
+[INFO] 17:17:37.044 Sensor Zero Coverage Sensor
+[INFO] 17:17:37.098 Sensor Zero Coverage Sensor (done) | time=54ms
+[INFO] 17:17:37.099 Sensor Java CPD Block Indexer
+[INFO] 17:17:37.165 Sensor Java CPD Block Indexer (done) | time=66ms
+[INFO] 17:17:37.227 CPD Executor 19 files had no CPD blocks
+[INFO] 17:17:37.227 CPD Executor Calculating CPD for 13 files
+[INFO] 17:17:37.250 CPD Executor CPD calculation finished (done) | time=22ms
+[INFO] 17:17:37.712 Analysis report generated in 391ms, dir size=200.5 kB
+[INFO] 17:17:38.394 Analysis report compressed in 680ms, zip size=80.8 kB
+[INFO] 17:17:38.442 Analysis report uploaded in 48ms
+[INFO] 17:17:38.449 ANALYSIS SUCCESSFUL, you can find the results at: http://localhost:9002/dashboard?id=fr.eseo.twic.alidouya%3Aserver
+[INFO] 17:17:38.449 Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+[INFO] 17:17:38.449 More about the report processing at http://localhost:9002/api/ce/task?id=AZeTEQ_8Yf6roEIoU6o3
+[INFO] 17:17:38.585 Analysis total time: 12.248 s
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  16.543 s
+[INFO] Finished at: 2025-06-21T17:17:38+02:00
+[INFO] ------------------------------------------------------------------------
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // withSonarQubeEnv
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Frontend)
+[Pipeline] dir
+Running in C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\client
+[Pipeline] {
+[Pipeline] bat
+
+C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\client>npm install 
+
+up to date, audited 553 packages in 2s
+
+98 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+[Pipeline] bat
+
+C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\client>ng build --configuration production 
+[33mâ�¯[39m Building...
+[32mâœ”[39m Building...
+[1mInitial chunk files[22m  [2m | [22m[1mNames[22m        [2m | [22m [1mRaw size[22m[2m | [22m[1mEstimated transfer size[22m
+[32mmain-NOW64HH6.js[39m     [2m | [22m[2mmain[22m         [2m | [22m[36m423.46 kB[39m[2m | [22m              [36m107.71 kB[39m
+[32mpolyfills-B6TNHZQ6.js[39m[2m | [22m[2mpolyfills[22m    [2m | [22m [36m34.58 kB[39m[2m | [22m               [36m11.32 kB[39m
+[32mstyles-7HHRNJJO.css[39m  [2m | [22m[2mstyles[22m       [2m | [22m  [36m5.54 kB[39m[2m | [22m                [36m1.84 kB[39m
+
+[1m [22m                    [2m | [22m[1mInitial total[22m[2m | [22m[1m463.58 kB[22m[2m | [22m              [1m120.88 kB[22m
+
+Application bundle generation complete. [8.813 seconds]
+
+Output location: C:\Users\yasmi\.jenkins\workspace\pipeline-r-twic\client\dist\client
+
+[Pipeline] }
+[Pipeline] // dir
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Archive Artifacts)
+[Pipeline] archiveArtifacts
+Archiving artifacts
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
