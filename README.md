@@ -1,4 +1,4 @@
-# Projet TP TWIC - Rattrapage
+# Projet TP TWIC 
 
 ## Mise en place
 
